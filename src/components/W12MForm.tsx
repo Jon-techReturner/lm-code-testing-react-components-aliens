@@ -1,75 +1,60 @@
 import { useState } from 'react';
 import W12MHeader from './W12MHeader';
-import { DisplayData, SpeciesName, PlanetName, NumOfBeing, SelectedOption, ReasonForSparing } from './W12MData';
-import PersonData from '../data/data';
-import { submissionData } from '../data/submission-data';
-import { v4 as uuidv4 } from "uuid";
+import  { DisplayData, SpeciesName, PlanetName, NumOfBeing, SelectedOption, ReasonForSparing } from './W12MData';
+import { W12MFormChangeHandler, W12MData } from '../data/data.types';
+
+const defaultFormData: W12MData = {
+	speciesName: '',
+	planetName: '',
+	numOfBeing: null,
+	reasonForSparing: '',
+	selected: 'NOT_SELECTED',
+};
 
 const W12MForm = () => {
-	submissionData.forEach((person) => (person.id = uuidv4()));
-	const [submittedPerson, setSubmittedPerson] = useState<Array<PersonData>>(submissionData);
+	const [newW12MData, setNewW12MData] = useState<W12MData>(defaultFormData);
 
-
-	const [speciesName, setSpeciesName] = useState<string>('');
-    const [planetName, setPlanetName] = useState<string>('');
-    const [numOfBeing, setNumOfBeing] = useState<number>(0);
-	const [reasonForSparing, setReasonForSparing] = useState<string>('');
-	const testNumOptions = ['4', 'Not 4'];
-	const [selected, setSelected] = useState(testNumOptions[0]);
-
-	const submitData = () => {
-		const newPerson: PersonData = {
-			speciesName,
-			planetName,
-			numOfBeing,
-			selected,
-			reasonForSparing,
-			
-		};
-		console.log(newPerson);
-		setSubmittedPerson(submittedPerson.concat([newPerson]));
-		clearForm();
+	const onChangeHandler: W12MFormChangeHandler = <
+		TKey extends keyof W12MData
+	>(
+		value: W12MData[TKey],
+		name: TKey
+	) => {
+		setSubmitted(false);
+		const newData: W12MData = { ...newW12MData };
+		newData[name] = value;
+		setNewW12MData(newData);
 	};
 
-	const clearForm = () => {
-        setSpeciesName('');
-        setPlanetName('');
-		setNumOfBeing(0); 
-		setSelected(testNumOptions[0]);  
-		setReasonForSparing('');
-        
-	};
+	const [submitted, setSubmitted] = useState(false);
 
 	return (
-		<section className='w12MForm'>
-			<W12MHeader />
-			<form className="form__content">
-				
-				<SpeciesName speciesName={speciesName} onChangeSpeciesName={(e : any) => setSpeciesName(e.target.value)} />
-				<PlanetName	planetName={planetName} onChangePlanetName={(e : any) => setPlanetName(e.target.value)} />
-				<NumOfBeing	numOfBeing={numOfBeing} onChangeNumOfBeing={(e : any) => setNumOfBeing(e.target.value)} />
-				<SelectedOption	selected={selected} onChangeSelectedOption={(e : any) => setSelected(e.target.value)} />
-				<ReasonForSparing reasonForSparing={reasonForSparing} onChangeReasonForSparing={(e : any) => setReasonForSparing(e.target.value)} />
+		<section className='W12MForm'>
+			
+			<form className="form__content"
+							data-testid='W12MForm'
+							onSubmit={(e) => {
+								e.preventDefault();
+								setSubmitted(true);
+							}}>
+				<W12MHeader />
+				<hr />
+				<SpeciesName value={newW12MData.speciesName} onChangeSpeciesName={onChangeHandler} name="speciesName"
+								/>
+				<hr />
+				<PlanetName	value={newW12MData.planetName} onChangePlanetName={onChangeHandler} name="planetName" />
+				<hr />
+				<NumOfBeing	value={(newW12MData.numOfBeing ?? '').toString()} onChangeNumOfBeing={onChangeHandler} name="numOfBeing" />
+				<hr />
+				<SelectedOption	value={newW12MData.selected} onChangeSelectedOption={ onChangeHandler} name="selected" />
+				<hr />
+				<ReasonForSparing value={newW12MData.reasonForSparing} onChangeReasonForSparing={onChangeHandler} name="reasonForSparing" />
+				<hr />
 				<div>
-					<button onClick={(e) => {e.preventDefault();
-							submitData();
-						}} className="button button--style"> Submit Form
-					</button>
+					<button type='submit'>Submit Form </button>
 				</div>
             </form>
-
-			<div className='form__submitted'>
-				{submittedPerson.map((person, i) => (
-					<DisplayData 
-						key={person.id}
-						speciesName={person.speciesName}
-						planetName={person.planetName}
-						numOfBeing={person.numOfBeing}
-						reasonForSparing={person.reasonForSparing}
-						selected={person.selected}
-					/>
-				))}
-			</div>
+			{submitted && <DisplayData form={newW12MData} />}
 			
 			
 			
