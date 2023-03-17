@@ -12,6 +12,7 @@ import { SpeciesName, SpeciesNameProps,
 describe('<InputText>', () => {
     it('renders an <input> given required props', () => {
         const requiredProps: SpeciesNameProps = {
+            id: 'speciesName', 
             value: 'speciesName', 
             name: 'speciesName',
             onChangeSpeciesName: jest.fn, 
@@ -22,8 +23,9 @@ describe('<InputText>', () => {
     });
     it('renders an <input> given required props', () => {
         const requiredProps: PlanetNameProps = {
+            id: 'planetName',
             value: 'planetName', 
-            name: 'speciesName',
+            name: 'planetName',
             onChangePlanetName: jest.fn, 
         };
         render(<PlanetName {...requiredProps} />);
@@ -32,8 +34,9 @@ describe('<InputText>', () => {
     });
     it('renders an <input> given required props', () => {
         const requiredProps: NumOfBeingProps = {
+            id: 'numOfBeing',
             value: '', 
-            name: 'speciesName',
+            name: 'numOfBeing',
             onChangeNumOfBeing: jest.fn, 
         };
         render(<NumOfBeing {...requiredProps} />);
@@ -42,8 +45,9 @@ describe('<InputText>', () => {
     });
     it('renders an <textarea> given required props', () => {
         const requiredProps: ReasonForSparingProps = {
+            id: 'reasonForSparing', 
             value: 'reasonForSparing', 
-            name: 'speciesName',
+            name: 'reasonForSparing',
             onChangeReasonForSparing: jest.fn, 
         };
         render(<ReasonForSparing {...requiredProps} />);
@@ -55,8 +59,9 @@ describe('<InputText>', () => {
 describe('<SelectInput>', () => {
     it('renders an <selectinput> given required props', () => {
         const requiredProps: SelectedOptionProps = {
+            id: 'selected', 
             value: 'selected', 
-            name: 'speciesName',
+            name: 'selected',
             onChangeSelectedOption: jest.fn, 
         };
         render(<SelectedOption {...requiredProps} />);

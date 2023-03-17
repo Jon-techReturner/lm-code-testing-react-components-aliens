@@ -31,24 +31,23 @@ const W12MForm = () => {
 	return (
 		<section className='W12MForm'>
 			
-			<form className="form__content"
-							data-testid='W12MForm'
-							onSubmit={(e) => {
-								e.preventDefault();
-								setSubmitted(true);
-							}}>
+			<form data-testid='W12MForm'
+					onSubmit={(e) => {
+						e.preventDefault();
+						setSubmitted(true);
+					}}>
 				<W12MHeader />
 				<hr />
-				<SpeciesName value={newW12MData.speciesName} onChangeSpeciesName={onChangeHandler} name="speciesName"
+				<SpeciesName id='speciesName' value={newW12MData.speciesName} onChangeSpeciesName={onChangeHandler} name="speciesName"
 								/>
 				<hr />
-				<PlanetName	value={newW12MData.planetName} onChangePlanetName={onChangeHandler} name="planetName" />
+				<PlanetName id='planetName'	value={newW12MData.planetName} onChangePlanetName={onChangeHandler} name="planetName" />
 				<hr />
-				<NumOfBeing	value={(newW12MData.numOfBeing ?? '').toString()} onChangeNumOfBeing={onChangeHandler} name="numOfBeing" />
+				<NumOfBeing id='numOfBeing'	value={(newW12MData.numOfBeing ?? '').toString()} onChangeNumOfBeing={onChangeHandler} name="numOfBeing" />
 				<hr />
-				<SelectedOption	value={newW12MData.selected} onChangeSelectedOption={ onChangeHandler} name="selected" />
+				<SelectedOption id="selected"	value={newW12MData.selected} onChangeSelectedOption={ onChangeHandler} name="selected" />
 				<hr />
-				<ReasonForSparing value={newW12MData.reasonForSparing} onChangeReasonForSparing={onChangeHandler} name="reasonForSparing" />
+				<ReasonForSparing id="reasonForSparing" value={newW12MData.reasonForSparing} onChangeReasonForSparing={onChangeHandler} name="reasonForSparing" />
 				<hr />
 				<div>
 					<button type='submit'>Submit Form </button>
