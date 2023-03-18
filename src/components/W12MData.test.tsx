@@ -15,7 +15,8 @@ describe('<InputText>', () => {
             id: 'speciesName', 
             value: 'speciesName', 
             name: 'speciesName',
-            onChangeSpeciesName: jest.fn, 
+            onChangeSpeciesName: jest.fn,
+            validate: jest.fn(), 
         };
         render(<SpeciesName {...requiredProps} />);
         const input = screen.getByRole('textbox');
@@ -26,7 +27,8 @@ describe('<InputText>', () => {
             id: 'planetName',
             value: 'planetName', 
             name: 'planetName',
-            onChangePlanetName: jest.fn, 
+            onChangePlanetName: jest.fn,
+            validate: jest.fn(), 
         };
         render(<PlanetName {...requiredProps} />);
         const input = screen.getByRole('textbox');
@@ -37,7 +39,8 @@ describe('<InputText>', () => {
             id: 'numOfBeing',
             value: '', 
             name: 'numOfBeing',
-            onChangeNumOfBeing: jest.fn, 
+            onChangeNumOfBeing: jest.fn,
+            validate: jest.fn(), 
         };
         render(<NumOfBeing {...requiredProps} />);
         const input = screen.getByRole('textbox');
@@ -48,7 +51,8 @@ describe('<InputText>', () => {
             id: 'reasonForSparing', 
             value: 'reasonForSparing', 
             name: 'reasonForSparing',
-            onChangeReasonForSparing: jest.fn, 
+            onChangeReasonForSparing: jest.fn,
+            validate: jest.fn(), 
         };
         render(<ReasonForSparing {...requiredProps} />);
         const input = screen.getByRole('textbox');
@@ -62,7 +66,8 @@ describe('<SelectInput>', () => {
             id: 'selected', 
             value: 'selected', 
             name: 'selected',
-            onChangeSelectedOption: jest.fn, 
+            onChangeSelectedOption: jest.fn,
+            validate: jest.fn(), 
         };
         render(<SelectedOption {...requiredProps} />);
         const input = screen.getByRole('combobox');

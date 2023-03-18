@@ -1,7 +1,21 @@
 import { useState } from 'react';
 import W12MHeader from './W12MHeader';
-import  { DisplayData, SpeciesName, PlanetName, NumOfBeing, SelectedOption, ReasonForSparing } from './W12MData';
+import  { 
+	SpeciesName, 
+	PlanetName, 
+	NumOfBeing, 
+	SelectedOption, 
+	ReasonForSparing 
+} from './W12MData';
+import {
+	validateNumberOfBeings,
+	validatePlanetName,
+	validateReasonForSparing,
+	validateSpeciesName,
+	validateTwoPlusTwo,
+} from '../validation/validate_w12_form';
 import { W12MFormChangeHandler, W12MData } from '../data/data.types';
+import { DisplayData } from './DisplayForm';
 
 const defaultFormData: W12MData = {
 	speciesName: '',
@@ -38,16 +52,45 @@ const W12MForm = () => {
 					}}>
 				<W12MHeader />
 				<hr />
-				<SpeciesName id='speciesName' value={newW12MData.speciesName} onChangeSpeciesName={onChangeHandler} name="speciesName"
-								/>
+				<SpeciesName 
+					id='speciesName' 
+					value={newW12MData.speciesName} 
+					onChangeSpeciesName={onChangeHandler} 
+					name="speciesName"
+					validate={validateSpeciesName}
+				/>
 				<hr />
-				<PlanetName id='planetName'	value={newW12MData.planetName} onChangePlanetName={onChangeHandler} name="planetName" />
+				<PlanetName 
+					id='planetName'	
+					value={newW12MData.planetName} 
+					onChangePlanetName={onChangeHandler} 
+					name="planetName" 
+					validate={validatePlanetName}
+				/>
 				<hr />
-				<NumOfBeing id='numOfBeing'	value={(newW12MData.numOfBeing ?? '').toString()} onChangeNumOfBeing={onChangeHandler} name="numOfBeing" />
+				<NumOfBeing 
+					id='numOfBeing'	
+					value={(newW12MData.numOfBeing ?? '').toString()} 
+					onChangeNumOfBeing={onChangeHandler} 
+					name="numOfBeing" 
+					validate={validateNumberOfBeings}
+				/>
 				<hr />
-				<SelectedOption id="selected"	value={newW12MData.selected} onChangeSelectedOption={ onChangeHandler} name="selected" />
+				<SelectedOption 
+					id="selected"	
+					value={newW12MData.selected} 
+					onChangeSelectedOption={ onChangeHandler} 
+					name="selected" 
+					validate={validateTwoPlusTwo}
+				/>
 				<hr />
-				<ReasonForSparing id="reasonForSparing" value={newW12MData.reasonForSparing} onChangeReasonForSparing={onChangeHandler} name="reasonForSparing" />
+				<ReasonForSparing 
+					id="reasonForSparing" 
+					value={newW12MData.reasonForSparing} 
+					onChangeReasonForSparing={onChangeHandler} 
+					name="reasonForSparing" 
+					validate={validateReasonForSparing}
+				/>
 				<hr />
 				<div>
 					<button type='submit'>Submit Form </button>
